@@ -4,7 +4,7 @@ Library/*
 Releases/*
 Temp/*
 UnityPackageManager/*
-
+.vs/*
 
 #files
 Firelight.csproj
