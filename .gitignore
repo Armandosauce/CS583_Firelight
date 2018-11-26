@@ -1,0 +1,14 @@
+
+#folders
+Library/*
+Releases/*
+Temp/*
+UnityPackageManager/*
+
+
+#files
+Firelight.csproj
+Firelight.sln
+
+# Unity will be able to generate everything using just the Assets folder and 
+# the ProjectSettings folder.
