@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     public TextMesh healthUI;
     public TextMesh lumoUI;
 
+    private AudioSource source;
     private float lumoHP;
     private bool _inv;
     private float timeLeft;
@@ -21,17 +22,14 @@ public class Player : MonoBehaviour {
     private Light lumo;
     private SpriteRenderer player;
     private Material def;
-    private BoxCollider2D body;
-    private BoxCollider2D weapon;
 
     // Use this for initialization
     void Start () {
         lumo = GameObject.FindGameObjectWithTag("Light").GetComponent<Light>();
         player = GetComponent<SpriteRenderer>();
         def = player.material;
-        body = GameObject.FindGameObjectWithTag("PlayerHitBox").GetComponent<BoxCollider2D>();
-        weapon = GameObject.FindGameObjectWithTag("Weapon").GetComponent<BoxCollider2D>();
         lumoHP = maxLumoHP;
+        source = GetComponentInChildren<AudioSource>();
 
 	}
 	
@@ -97,6 +95,10 @@ public class Player : MonoBehaviour {
     public void damage(float amount)
     {
         playerHP -= amount;
+        if(playerHP <= 0)
+        {
+            playerHP = 0;
+        }
         healthUI.text = "HP: " + playerHP.ToString("0");
 
     }
@@ -129,11 +131,13 @@ public class Player : MonoBehaviour {
         {
             playerHP += amt;
         }
+        
+    }
 
-        if(type == "speed")
-        {
-
-        }
+    public void playSound(AudioClip clip)
+    {
+        source.clip = clip;
+        source.Play();
     }
 }
 

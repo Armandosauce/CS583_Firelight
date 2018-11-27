@@ -7,16 +7,10 @@ public class playerFOV : MonoBehaviour {
     public Transform target;
     public float light_speed = 1f;
     public float range = 10f;
-    Light lighting;
-
-	// Use this for initialization
-	void Start () {
-        lighting = GetComponent<Light>();
-	}
-	
+    
 	// Update is called once per frame
 	void FixedUpdate () {
-
+        
         
         if (target)
         {

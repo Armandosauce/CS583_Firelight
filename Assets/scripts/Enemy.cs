@@ -18,12 +18,12 @@ public class Enemy : MonoBehaviour {
     private TextMesh hpText;
     private MeshRenderer text;
     private float distance;
-    private bool inRange = false;
     private bool _inv = false;
     private float _timestamp;
     private GameObject[] itemdrop;
     private Vector3 itempos;
     private int rand;
+    private AudioSource source;
 
 	// Use this for initialization
 	void Start () {
@@ -35,8 +35,8 @@ public class Enemy : MonoBehaviour {
         hpText = GetComponentInChildren<TextMesh>();
         text = GetComponentInChildren<MeshRenderer>();
         itemdrop = GameObject.FindGameObjectsWithTag("Consumable");
-        rand = Random.Range(0, 6);
-       
+        rand = Random.Range(0, 4);
+        source = GetComponentInChildren<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -147,6 +147,12 @@ public class Enemy : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        source.clip = clip;
+        source.Play();
     }
     
     

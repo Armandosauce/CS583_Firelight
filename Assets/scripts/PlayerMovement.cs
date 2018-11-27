@@ -23,9 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private float baseDash;
     private float timeStamp;
     private float _dashOn;
-    private bool walking = false;
-    private float baseDelay;
-    private Transform lumo;
+    //private Sorting sort;
+
     // Use this for initialization
     void Start()
     {
@@ -35,25 +34,24 @@ public class PlayerMovement : MonoBehaviour
         playerSprite = GetComponent<SpriteRenderer>();
         col = GameObject.FindGameObjectWithTag("PlayerHitBox").GetComponent<BoxCollider2D>();
         baseDash = 1f;
-        //boostDelay = boostDelay * 1000;
-        baseDelay = boostDelay;
-        lumo = GameObject.FindGameObjectWithTag("Lumo").transform;
         input = gameObject.AddComponent<InputManager>() as InputManager;
         weapon = GetComponentInChildren<BoxCollider2D>();
+        //sort = gameObject.AddComponent<Sorting>() as Sorting;
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        checkLayer();
+
         if(baseDash != 1f)
         {
             baseDash = 1f;
         }
 
         input.movement = input.movement.normalized * Time.deltaTime * baseMovementSpeed;
-        checkLayer();
-
+        
         if (input.movement != Vector2.zero)
         {
 
@@ -149,14 +147,12 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    private void checkLayer()
+    public void checkLayer()
     {
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        /*
         List<GameObject> entities = new List<GameObject>();
-        
+
         for (int i = 0; i < objects.Length; i++)
         {
             entities.Add(objects[i]);
@@ -166,35 +162,37 @@ public class PlayerMovement : MonoBehaviour
         {
             entities.Add(enemies[i]);
         }
-        */
-        for (int i = 0; i < objects.Length; i++)
+
+        for (int i = 0; i < entities.Count; i++)
         {
 
-            if (this.transform.position.y - objects[i].GetComponent<Transform>().position.y < 0.05)
+            if (this.transform.position.y - entities[i].GetComponent<Transform>().position.y < 0.05)
             {
-                objects[i].GetComponent<TilemapRenderer>().sortingOrder = 3;
+                if (entities[i].GetComponent<TilemapRenderer>())
+                {
+                    entities[i].GetComponent<TilemapRenderer>().sortingOrder = 3;
+                }
+                else
+                {
+                    entities[i].GetComponent<SpriteRenderer>().sortingOrder = 3;
+                }
             }
             else
             {
-                objects[i].GetComponent<TilemapRenderer>().sortingOrder = 5;
+                if (entities[i].GetComponent<TilemapRenderer>())
+                {
+                    entities[i].GetComponent<TilemapRenderer>().sortingOrder = 5;
+                }
+                else
+                {
+                    entities[i].GetComponent<SpriteRenderer>().sortingOrder = 5;
+                }
             }
-        }
 
-        for (int i = 0; i < enemies.Length; i++)
-        {
 
-            if (this.transform.position.y - enemies[i].GetComponent<Transform>().position.y < 0.05)
-            {
-                enemies[i].GetComponent<SpriteRenderer>().sortingOrder = 3;
-            }
-            else
-            {
-                enemies[i].GetComponent<SpriteRenderer>().sortingOrder = 5;
-            }
         }
     }
-        
-    
+
 }
 
 

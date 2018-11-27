@@ -13,6 +13,10 @@ TagManager:
   - EnemyCol
   - Item
   - Consumable
+  - Chest
+  - Music
+  - Goal
+  - MapLight
   layers:
   - Default
   - TransparentFX
@@ -23,7 +27,7 @@ TagManager:
   - 
   - 
   - Objects
-  - 
+  - Text
   - 
   - 
   - 
@@ -49,7 +53,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Enemies
-    uniqueID: 3989033299
     locked: 0
