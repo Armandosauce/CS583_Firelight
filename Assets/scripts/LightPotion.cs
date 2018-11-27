@@ -26,4 +26,13 @@ public class LightPotion : MonoBehaviour {
         }   
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerHitBox")
+        {
+            player.usePotion(type, amt);
+            Destroy(this.gameObject);
+        }
+    }
+
 }
