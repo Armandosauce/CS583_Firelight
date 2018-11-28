@@ -20,3 +20,9 @@
     Left Shift - Hold to run
     Spacebar - Press while moving to Dash
     \ (Backslash) - Attack, can press up to 3 times in succession to combo
+    
+    
+    Notes:
+        The /Releases folder is not needed to run the game it simply contains 
+        a number of builds creating during Firelight's development, the most
+        recent of which is the final build of the game.
