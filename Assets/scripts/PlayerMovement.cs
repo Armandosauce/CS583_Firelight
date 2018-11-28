@@ -43,69 +43,72 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        checkLayer();
-
-        if(baseDash != 1f)
+        if (!Player.isGameOver())
         {
-            baseDash = 1f;
-        }
+            checkLayer();
 
-        input.movement = input.movement.normalized * Time.deltaTime * baseMovementSpeed;
-        
-        if (input.movement != Vector2.zero)
-        {
-
-            anim.SetBool("isWalking", true);
-            anim.SetFloat("Input_X", input.movement.x);
-            anim.SetFloat("Input_Y", input.movement.y);
-            if (anim.GetFloat("Input_X") <= 0)
+            if (baseDash != 1f)
             {
-                playerSprite.flipX = true;
-                col.transform.rotation = Quaternion.Euler(0, -180, 0);
-                weapon.transform.rotation = Quaternion.Euler(0, -180, 0);
+                baseDash = 1f;
+            }
+
+            input.movement = input.movement.normalized * Time.deltaTime * baseMovementSpeed;
+
+            if (input.movement != Vector2.zero)
+            {
+
+                anim.SetBool("isWalking", true);
+                anim.SetFloat("Input_X", input.movement.x);
+                anim.SetFloat("Input_Y", input.movement.y);
+                if (anim.GetFloat("Input_X") <= 0)
+                {
+                    playerSprite.flipX = true;
+                    col.transform.rotation = Quaternion.Euler(0, -180, 0);
+                    weapon.transform.rotation = Quaternion.Euler(0, -180, 0);
+                }
+                else
+                {
+                    playerSprite.flipX = false;
+                    col.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    weapon.transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
             }
             else
             {
-                playerSprite.flipX = false;
-                col.transform.rotation = Quaternion.Euler(0, 0, 0);
-                weapon.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+                anim.SetBool("isWalking", false);
             }
-        }
-        else
-        {
 
-            anim.SetBool("isWalking", false);
-        }
-
-        CheckAttack();
-        text.text = (timeStamp - Time.time).ToString("0.00");
-
-        
-        CheckDash();
-        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Dash"))
-        {
-            baseDash = dashSpeed;
-        }
-        
+            CheckAttack();
+            text.text = (timeStamp - Time.time).ToString("0.00");
 
 
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsTag("Action"))
-        {
-            if (input.runKey)
+            CheckDash();
+            if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Dash"))
             {
-                rb.MovePosition(rb.position + input.movement * baseDash * speedBoost);
+                baseDash = dashSpeed;
             }
-            else
+
+
+
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsTag("Action"))
             {
-                rb.MovePosition(rb.position + input.movement * baseDash);
+                if (input.runKey)
+                {
+                    rb.MovePosition(rb.position + input.movement * baseDash * speedBoost);
+                }
+                else
+                {
+                    rb.MovePosition(rb.position + input.movement * baseDash);
+                }
             }
-        }
-    
 
 
-        if(timeStamp - Time.time <= 0)
-        {
-            text.enabled = false;
+
+            if (timeStamp - Time.time <= 0)
+            {
+                text.enabled = false;
+            }
         }
     }
 

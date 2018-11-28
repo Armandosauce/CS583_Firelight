@@ -25,6 +25,11 @@ public class SceneChanger : MonoBehaviour {
         return SceneManager.GetActiveScene().buildIndex;
     }
 
+    public void reloadScene()
+    {
+        loadSceneAfterDelay(loadDelay, currentSceneIndex());
+    }
+
     public void loadSceneAfterDelay(float time, int index)
     {
         StartCoroutine(delayLoad(time, index));

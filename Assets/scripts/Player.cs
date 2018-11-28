@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     public TextMesh healthUI;
     public TextMesh lumoUI;
 
+    private SceneChanger scenechanger;
     private AudioSource source;
     private float lumoHP;
     private bool _inv;
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour {
     private Light lumo;
     private SpriteRenderer player;
     private Material def;
+    private Animator anim;
+    private static bool _gameover;
 
     // Use this for initialization
     void Start () {
@@ -30,36 +33,37 @@ public class Player : MonoBehaviour {
         def = player.material;
         lumoHP = maxLumoHP;
         source = GetComponentInChildren<AudioSource>();
-
+        scenechanger = gameObject.AddComponent<SceneChanger>() as SceneChanger;
+        anim = GetComponent<Animator>();
+        Time.timeScale = 1f;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 
+        healthUI.text = "HP: " + playerHP;
         updateLumo();
+
         //flicker on damage
-        if(_inv)
+        if (_inv)
         {
             player.enabled = !player.enabled;
         }
-        else if(!player.enabled)
+        else if (!player.enabled)
         {
             player.enabled = true;
         }
 
         // become vulnerable again after getting hit
-        if(_timestamp <= Time.time)
+        if (_timestamp <= Time.time)
         {
             _inv = false;
         }
 
-        // if hp goes to zero (or below), its game over
-        if(playerHP <= 0)
+        if (playerHP <= 0 || lumoHP <= 0)
         {
             GameOver();
-        }
-        healthUI.text = "HP: " + playerHP;
-        
+        }        
 	}
 
     void updateLumo()
@@ -105,7 +109,17 @@ public class Player : MonoBehaviour {
 
     void GameOver()
     {
-        Time.timeScale = 0;
+        if (!_gameover)
+        {
+            _gameover = true;
+            Time.timeScale = 0.70f;
+            anim.Play("player_death");
+        }
+    }
+
+    public static bool isGameOver()
+    {
+        return _gameover;
     }
 
     public void invincibility()
@@ -138,6 +152,11 @@ public class Player : MonoBehaviour {
     {
         source.clip = clip;
         source.Play();
+    }
+
+    public void reloadScene()
+    {
+        scenechanger.reloadScene();
     }
 }
 

@@ -17,6 +17,7 @@ TagManager:
   - Music
   - Goal
   - MapLight
+  - SceneChanger
   layers:
   - Default
   - TransparentFX
