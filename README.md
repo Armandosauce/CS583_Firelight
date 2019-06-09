@@ -1,5 +1,5 @@
     
-    [Firelight Gameplay Clip](https://drive.google.com/open?id=17SLb5xJr8NlLUzKSbj3wY4Ft3c5o12oe "Firelight Gameplay Clip")
+    [Firelight Gameplay Clip]: https://drive.google.com/open?id=17SLb5xJr8NlLUzKSbj3wY4Ft3c5o12oe "Firelight Gameplay Clip"
     
     The project can be generated in Unity by downloading this git repository 
     and extracting the files to a folder. Then, start the Unity Editor, and 
