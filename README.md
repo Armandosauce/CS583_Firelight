@@ -1,10 +1,10 @@
     
     [Firelight Gameplay Clip](https://drive.google.com/open?id=17SLb5xJr8NlLUzKSbj3wY4Ft3c5o12oe)
     
-    The project can be generated in Unity by downloading this git repository 
+    **The project can be generated in Unity by downloading this git repository 
     and extracting the files to a folder. Then, start the Unity Editor, and 
     click "Open", then navigate to the folder where this project was extracted 
-    to and click "Select Folder".
+    to and click "Select Folder".**
     
     The purpose of the level "Dungeon" is to make it to the bottom left corner 
     and find the final chest, which will illuminate the entire level.
