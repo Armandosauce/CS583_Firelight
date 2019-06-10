@@ -5,8 +5,9 @@
     click "Open", then navigate to the folder where this project was extracted 
     to and click "Select Folder".
     
-    The purpose of the level "Dungeon" is to make it to the bottom left corner 
-    and find the final chest, which will illuminate the entire level.
+    The purpose of the level "Dungeon" is to make it to the bottom right corner 
+    and find the final chest, which will illuminate the entire level. Access the 
+    Game Design Document (GDD) for more information.
     
     After doing so, it will take you to the End Credits which has the game's 
     title, and the lead designer's name.
